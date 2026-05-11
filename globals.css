@@ -1,0 +1,248 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bg: #ffffff;
+  --color-fg: #000000cf;
+  --color-fg-strong: #000000;
+  --color-border: #0000000f;
+}
+
+html {
+  font-size: 15.5px; /* base slightly smaller so copy is tighter without being tiny */
+}
+
+html, body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-inter), Inter, system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+body { min-height: 100vh; }
+
+img { max-width: 100%; height: auto; }
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-fg-strong);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 bg-black text-white px-6 py-3 rounded-btn font-medium transition hover:bg-neutral-800;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center gap-2 bg-transparent text-black border border-black px-6 py-3 rounded-btn font-medium transition hover:bg-neutral-50;
+}
+
+.container-page {
+  @apply max-w-page mx-auto px-5;
+}
+
+/* marquee */
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.animate-marquee { animation: marquee 28s linear infinite; }
+.animate-marquee-slow { animation: marquee 40s linear infinite; }
+
+details > summary { list-style: none; cursor: pointer; }
+details > summary::-webkit-details-marker { display: none; }
+
+.field {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  border-radius: 10px;
+  border: 1px solid #d4d4d4;
+  background: #fff;
+  font-size: 14px;
+  color: #111;
+  outline: none;
+  transition: border-color .15s ease;
+}
+.field:focus { border-color: #000; }
+textarea.field { height: auto; padding-top: 12px; padding-bottom: 12px; }
+
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { scrollbar-width: none; -ms-overflow-style: none; }
+
+/* ---------- Sober express card (delivery timeline) ---------- */
+.sober-express-card {
+  width: 100%;
+  margin: 0 auto;
+  padding: 18px 22px;
+  background: #ffffff;
+  border: 1px solid #eeeeee;
+  border-radius: 16px;
+  font-family: "Inter", -apple-system, sans-serif;
+  color: #333333;
+}
+.s-badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #888888;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #eeeeee;
+  padding-bottom: 4px;
+}
+.s-title {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0 0 24px 0;
+  letter-spacing: -0.3px;
+  text-align: center;
+}
+.s-title span { color: #999; font-weight: 300; }
+.s-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+.s-step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.s-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.s-step-1 .s-icon { background: #1a1a1a; }
+.s-step-2 .s-icon { background: #f5f5f5; border: 1px solid #e5e5e5; }
+.s-step-3 .s-icon { background: #fff; border: 1px solid #eee; }
+.s-icon svg { width: 18px; height: 18px; }
+.s-date { font-size: 12px; font-weight: 600; color: #1a1a1a; margin-bottom: 2px; }
+.s-label { font-size: 10px; color: #888; font-weight: 400; max-width: 70px; }
+.s-line { flex: 0.5; height: 1px; background: #eee; margin-top: 22px; }
+.s-footer {
+  padding-top: 12px;
+  border-top: 1px solid #f9f9f9;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+.s-footer-item { font-size: 11px; color: #999; display: flex; align-items: center; gap: 5px; }
+.s-dot { width: 3px; height: 3px; background: #ccc; border-radius: 50%; align-self: center; }
+
+/* ---------- Trust + payment block ---------- */
+.trust-wrapper { margin-top: 20px; font-family: "Inter", -apple-system, sans-serif; }
+.trust-block {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 16px;
+  padding: 18px 20px;
+}
+.badges-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f3f3f3;
+}
+.badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+}
+.badge-icon {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: #fafafa;
+  border: 1px solid #eee;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.badge-icon svg { width: 18px; height: 18px; fill: none; stroke: #333; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.badge-info { display: flex; flex-direction: column; min-width: 0; width: 100%; }
+.badge-title { font-size: 12.5px; font-weight: 600; color: #1a1a1a; line-height: 1.25; }
+.badge-sub { font-size: 11px; color: #888; margin-top: 2px; line-height: 1.3; }
+
+.payment-section {
+  padding-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+.pay-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  color: #999;
+}
+.payment-logos { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+.pill {
+  height: 22px;
+  min-width: 36px;
+  padding: 0 8px;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #1a1a1a;
+}
+.pill.visa span { color: #1a1f71; font-style: italic; font-weight: 900; letter-spacing: 1px; }
+.pill.amex span { color: #016fd0; font-weight: 900; }
+.pill.paypal span { color: #003087; font-weight: 700; }
+.pill.paypal em { color: #009cde; font-style: normal; }
+.pill.apple span::before { content: "\f8ff"; font-size: 11px; margin-right: 2px; color: #000; }
+.pill.apple span { color: #000; font-weight: 600; }
+.pill.gpay { font-weight: 600; letter-spacing: 0; }
+.pill.gpay .g1 { color: #4285f4; }
+.pill.gpay .g2 { color: #ea4335; }
+.pill.gpay .g3 { color: #fbbc04; }
+.pill.gpay .g4 { color: #4285f4; }
+.pill.gpay .g5 { color: #34a853; }
+.pill.gpay .g6 { color: #ea4335; }
+.pill.gpay .gp { color: #5f6368; font-weight: 500; }
+
+.mc { display: flex; }
+.mc-r, .mc-y { width: 14px; height: 14px; border-radius: 50%; }
+.mc-r { background: #eb001b; }
+.mc-y { background: #f79e1b; margin-left: -6px; mix-blend-mode: multiply; }
+
+/* ---------- Add to cart shimmer button ---------- */
+.btn-atc {
+  position: relative;
+  overflow: hidden;
+  background-color: #000000;
+  color: #ffffff;
+}
+.btn-atc::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  z-index: 0;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.25), transparent);
+  animation: atc-wave 2s infinite linear;
+  pointer-events: none;
+}
+.btn-atc > * { position: relative; z-index: 1; }
+@keyframes atc-wave {
+  0%   { left: -150%; }
+  100% { left: 150%; }
+}
