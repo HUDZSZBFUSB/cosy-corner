@@ -16,69 +16,25 @@ function getSessionId() {
   return id;
 }
 
-/* GPS du navigateur — précis à quelques mètres */
-function getGpsGeo() {
-  return new Promise((resolve) => {
-    if (!navigator.geolocation) return resolve(null);
-    navigator.geolocation.getCurrentPosition(
-      (pos) => resolve({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
-      ()    => resolve(null),
-      { timeout: 5000, maximumAge: 300000 }
-    );
-  });
-}
-
-/* Reverse geocode avec nominatim (gratuit, no key) */
-async function reverseGeocode(lat, lng) {
-  try {
-    const res  = await fetch(
-      `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`,
-      { headers: { "Accept-Language": "fr" } }
-    );
-    const data = await res.json();
-    return {
-      city:    data.address?.city || data.address?.town || data.address?.village || "",
-      country: data.address?.country || "",
-    };
-  } catch {
-    return { city: "", country: "" };
-  }
-}
-
-/* Fallback IP — ipapi.co */
-async function getIpGeo() {
-  try {
-    const res  = await fetch("https://ipapi.co/json/", { cache: "no-store" });
-    const data = await res.json();
-    return {
-      lat:     data.latitude    || null,
-      lng:     data.longitude   || null,
-      city:    data.city        || "",
-      country: data.country_name || "",
-    };
-  } catch {
-    return { lat: null, lng: null, city: "", country: "" };
-  }
-}
-
+/* Géolocalisation par IP — silencieuse, aucune popup */
 async function getGeo() {
-  /* 1. Check cache */
   const cached = sessionStorage.getItem("cosy_geo");
   if (cached) return JSON.parse(cached);
 
-  /* 2. Try GPS first (exact position) */
-  const gps = await getGpsGeo();
-  if (gps) {
-    const place = await reverseGeocode(gps.lat, gps.lng);
-    const geo   = { lat: gps.lat, lng: gps.lng, ...place };
+  try {
+    const res  = await fetch("https://ipapi.co/json/", { cache: "no-store" });
+    const data = await res.json();
+    const geo  = {
+      lat:     data.latitude     || null,
+      lng:     data.longitude    || null,
+      city:    data.city         || "",
+      country: data.country_name || "",
+    };
     sessionStorage.setItem("cosy_geo", JSON.stringify(geo));
     return geo;
+  } catch {
+    return { lat: null, lng: null, city: "", country: "" };
   }
-
-  /* 3. Fallback: IP geolocation */
-  const geo = await getIpGeo();
-  sessionStorage.setItem("cosy_geo", JSON.stringify(geo));
-  return geo;
 }
 
 async function ping(session_id, page, geo) {
