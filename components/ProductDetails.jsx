@@ -14,7 +14,7 @@ export default function ProductDetails({ product = defaultProduct }) {
 
   const giftLabel = product.giftLabel || "Coussin décoratif coordonné";
   const giftDesc = product.giftDesc || "Offert avec chaque commande.";
-  const giftImage = product.giftImage || "https://astrasale.com/cdn/shop/files/shopping_2.webp?v=1776557360";
+  const giftImage = product.giftImage || "/ultra-epais.png";
 
   return (
     <div className="container-page py-6 md:py-10 overflow-x-hidden">

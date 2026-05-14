@@ -32,13 +32,7 @@ export default function StickyAddToCart({ product }) {
       cart_total: total + product.price,
       step: "add_to_cart",
     });
-    // TikTok AddToCart
-    try {
-      window.ttq?.track("AddToCart", {
-        value: product.price, currency: "EUR",
-        contents: [{ content_id: product.handle, content_name: product.title, content_type: "product", quantity: 1, price: product.price }],
-      });
-    } catch {}
+    try { window.ttq?.track("AddToCart", { value: product.price, currency: "EUR", contents: [{ content_id: product.handle, content_name: product.title, content_type: "product", quantity: 1, price: product.price }] }); } catch {}
     // Server-side AddToCart
     try { window.TTTracker?.track("AddToCart"); } catch {}
   }

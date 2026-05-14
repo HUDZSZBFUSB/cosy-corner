@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { trackPageview } from "@/lib/track";
 
-const ADMIN_URL = "https://cosy-saas.vercel.app";
+const ADMIN_URL = "http://localhost:4000";
 const PING_INTERVAL = 20000;
 
 function getSessionId() {
