@@ -10,7 +10,7 @@ const LINKS = [
   { href: "/products/fauteuil-nuage-rond", label: "Fauteuil Nuage Rond" },
   { href: "/products/leviya-tv", label: "TV 4K Portable" },
   { href: "/pages/suivi", label: "Suivi de commande" },
-  { href: "/#avis", label: "Avis" },
+  { href: "/products/bubble-sofa-mini#avis", label: "Avis" },
   { href: "/contact", label: "Contact" },
 ];
 
