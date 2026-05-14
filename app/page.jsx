@@ -12,7 +12,7 @@ const PRODUCTS = [
     price: 29.9,
     compare: 49.99,
     tag: "Bestseller",
-    image: "/01.png",
+    image: "https://cdn.shopify.com/s/files/1/0996/5512/3321/files/generated-image_15.png?v=1776879786",
   },
   {
     handle: "bubble-sofa-3-places",
@@ -22,7 +22,7 @@ const PRODUCTS = [
     price: 29.9,
     compare: 49.99,
     tag: "Nouveau",
-    image: "/poster3.jpg",
+    image: "https://cdn.shopify.com/s/files/1/0996/5512/3321/files/hhh01_2.png?v=1777925909",
   },
   {
     handle: "fauteuil-nuage-rond",

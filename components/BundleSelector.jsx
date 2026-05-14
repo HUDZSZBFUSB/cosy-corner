@@ -113,7 +113,13 @@ export default function BundleSelector({ product, variant, onVariantChange }) {
         cart_total: total + current.price,
         step: "add_to_cart",
       });
-      try { window.ttq?.track("AddToCart", { value: current.price, currency: "EUR", contents: [{ content_id: product.handle, content_name: product.title, content_type: "product", quantity: 1, price: current.price }] }); } catch {}
+      // TikTok AddToCart
+      try {
+        window.ttq?.track("AddToCart", {
+          value: current.price, currency: "EUR",
+          contents: [{ content_id: product.handle, content_name: product.title, content_type: "product", quantity: 1, price: current.price }],
+        });
+      } catch {}
       // Server-side AddToCart
       try { window.TTTracker?.track("AddToCart"); } catch {}
     } else {
@@ -144,7 +150,13 @@ export default function BundleSelector({ product, variant, onVariantChange }) {
         cart_total: total + current.price,
         step: "add_to_cart",
       });
-      try { window.ttq?.track("AddToCart", { value: current.price, currency: "EUR", contents: [{ content_id: product.handle, content_name: titleX2, content_type: "product", quantity: 2, price: unit }] }); } catch {}
+      // TikTok AddToCart (pack)
+      try {
+        window.ttq?.track("AddToCart", {
+          value: current.price, currency: "EUR",
+          contents: [{ content_id: product.handle, content_name: titleX2, content_type: "product", quantity: 2, price: unit }],
+        });
+      } catch {}
       // Server-side AddToCart
       try { window.TTTracker?.track("AddToCart"); } catch {}
     }

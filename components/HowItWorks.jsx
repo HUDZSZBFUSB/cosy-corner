@@ -4,17 +4,17 @@ import { useEffect, useRef, useState } from "react";
 
 const CARDS = [
   {
-    img: "/01.png",
+    img: "https://astrasale.com/cdn/shop/files/generated-image_8.png?v=1776587004&width=900",
     title: "Choisissez votre coloris",
     desc: "Plusieurs teintes disponibles pour coller à votre univers déco. Sélectionnez le vôtre directement sur la fiche.",
   },
   {
-    img: "/03.png",
+    img: "https://astrasale.com/cdn/shop/files/generated-image_5.png?v=1776586845&width=900",
     title: "Posez et orientez",
     desc: "Aucun montage, aucune contrainte. Pivotez à 360° selon vos envies.",
   },
   {
-    img: "/05.png",
+    img: "https://astrasale.com/cdn/shop/files/generated-image_7.png?v=1776586845&width=900",
     title: "Profitez",
     desc: "Installez-vous et laissez vos invités vous demander où vous l'avez trouvé.",
   },

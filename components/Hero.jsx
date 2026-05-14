@@ -6,7 +6,7 @@ export default function Hero() {
       <div className="relative w-full aspect-[16/9] md:aspect-[21/9] max-h-[680px] overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/01.png"
+          src="https://cdn.shopify.com/s/files/1/0996/5512/3321/files/generated-image_15.png?v=1776879786"
           alt="Cosy Corner"
           className="absolute inset-0 w-full h-full object-cover"
         />

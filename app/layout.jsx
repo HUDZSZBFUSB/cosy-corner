@@ -21,6 +21,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="fr" className={inter.variable}>
       <body>
+        <Script
+          src="http://localhost:3001/tracker.js?pixel=D7TKIPBC77UEPF9JUHPG&endpoint=http://localhost:3001"
+          strategy="afterInteractive"
+        />
         <Script id="tiktok-pixel" strategy="afterInteractive">
           {`
 !function (w, d, t) {
