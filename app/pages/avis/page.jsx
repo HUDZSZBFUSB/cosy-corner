@@ -1,6 +1,6 @@
 export const metadata = {
   title: "Avis clients — Cosy Corner",
-  description: "Plus de 40 000 avis vérifiés sur le 3D Bubble Sofa Mini. Note moyenne 4,4/5 sur Trustpilot.",
+  description: "Plus de 20 000 avis vérifiés sur le 3D Bubble Sofa Mini. Note moyenne 4,4/5 sur Trustpilot.",
 };
 
 const REVIEWS = [
@@ -103,89 +103,118 @@ const REVIEWS = [
   { name: "Lucette A.", city: "Lille", rating: 5, date: "il y a 8 mois", title: "Très bien", text: "Très bien. Je suis ravie de mon achat. Le fauteuil est beau, confortable et bien fait." },
 ];
 
-const RATING_COUNTS = { 5: 78, 4: 16, 3: 4, 2: 1, 1: 1 };
-const TOTAL = 100;
 const AVG = 4.4;
+const TOTAL = "20 341";
+const RATING_COUNTS = { 5: 15865, 4: 3256, 3: 815, 2: 203, 1: 102 };
+const RATING_TOTAL = 20241;
 
-function Stars({ n, size = "text-[18px]" }) {
+function TrustpilotLogo() {
   return (
-    <span className={`${size} leading-none tracking-wide`} style={{ color: "#00b67a" }}>
-      {"★".repeat(n)}{"☆".repeat(5 - n)}
-    </span>
+    <div className="flex items-center gap-1.5">
+      <svg viewBox="0 0 126 117" className="w-5 h-5" fill="#00b67a"><path d="M63 0l15.12 46.53H126L88.44 75.27l15.12 46.53L63 93.06 22.44 121.8l15.12-46.53L0 46.53h47.88z"/></svg>
+      <span className="font-bold text-[15px] tracking-tight">Trustpilot</span>
+    </div>
+  );
+}
+
+function StarRow({ filled, size = 16 }) {
+  return (
+    <div className="flex gap-0.5">
+      {[1,2,3,4,5].map(i => (
+        <div key={i} className="rounded-[3px] flex items-center justify-center"
+          style={{ width: size, height: size, backgroundColor: i <= filled ? "#00b67a" : "#dcdce6" }}>
+          <svg viewBox="0 0 24 24" fill="white" width={size * 0.65} height={size * 0.65}>
+            <path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01z"/>
+          </svg>
+        </div>
+      ))}
+    </div>
   );
 }
 
 function RatingBar({ stars, count }) {
-  const pct = Math.round((count / TOTAL) * 100);
+  const pct = Math.round((count / RATING_TOTAL) * 100);
   return (
-    <div className="flex items-center gap-3">
-      <span className="text-[13px] text-neutral-600 w-16 shrink-0">{stars} étoiles</span>
-      <div className="flex-1 h-2.5 bg-neutral-100 rounded-full overflow-hidden">
-        <div className="h-full rounded-full" style={{ width: `${pct}%`, backgroundColor: "#00b67a" }} />
+    <div className="flex items-center gap-3 text-[13px]">
+      <span className="w-14 shrink-0 text-neutral-700">{stars} étoiles</span>
+      <div className="flex-1 h-2 rounded-full bg-neutral-200 overflow-hidden">
+        <div className="h-full rounded-full transition-all" style={{ width: `${pct}%`, backgroundColor: "#00b67a" }} />
       </div>
-      <span className="text-[13px] text-neutral-500 w-8 text-right shrink-0">{count}</span>
+      <span className="w-10 text-right text-neutral-500 shrink-0">{Math.round(pct)}%</span>
     </div>
   );
 }
 
 export default function AvisPage() {
   return (
-    <div className="bg-neutral-50 min-h-screen py-10 md:py-14">
-      <div className="container-page max-w-4xl">
+    <div className="min-h-screen" style={{ backgroundColor: "#f4f4f4" }}>
 
-        {/* Header Trustpilot */}
-        <div className="bg-white rounded-2xl shadow-sm border border-neutral-100 p-6 md:p-8 mb-8">
-          <div className="flex flex-col md:flex-row md:items-center gap-6">
-            <div className="text-center md:text-left">
-              <div className="flex items-center gap-2 justify-center md:justify-start mb-1">
-                <svg viewBox="0 0 126 117" className="w-7 h-7" fill="#00b67a">
-                  <path d="M63 0L79.5 51H126L88.5 82.5L105 133.5L63 102L21 133.5L37.5 82.5L0 51H46.5L63 0Z" />
-                </svg>
-                <span className="font-bold text-[15px] text-neutral-900">Trustpilot</span>
-              </div>
-              <div className="text-6xl font-black text-neutral-900">{AVG}</div>
-              <Stars n={5} size="text-[28px]" />
-              <p className="text-neutral-500 text-[13px] mt-1">Basé sur <strong className="text-neutral-900">{TOTAL} avis vérifiés</strong></p>
-            </div>
-            <div className="flex-1 space-y-2">
-              {[5, 4, 3, 2, 1].map(s => (
-                <RatingBar key={s} stars={s} count={RATING_COUNTS[s] || 0} />
-              ))}
-            </div>
+      {/* Hero banner */}
+      <div className="bg-white border-b border-neutral-200 py-10 md:py-14">
+        <div className="container-page max-w-3xl text-center">
+          <TrustpilotLogo />
+          <h1 className="text-3xl md:text-4xl font-black tracking-tight mt-4 mb-1 text-neutral-900">
+            Avis clients
+          </h1>
+          <p className="text-neutral-500 text-[15px]">3D Bubble Sofa Mini · Cosy Corner</p>
+
+          {/* Big score */}
+          <div className="mt-6 flex flex-col items-center gap-3">
+            <span className="text-7xl font-black text-neutral-900 leading-none">{AVG}</span>
+            <StarRow filled={5} size={36} />
+            <p className="text-neutral-600 text-[14px]">
+              <span className="font-bold text-neutral-900">{TOTAL} avis vérifiés</span>
+              {" "}sur{" "}
+              <span className="inline-flex items-center gap-1 font-bold">
+                <svg viewBox="0 0 126 117" className="w-3.5 h-3.5" fill="#00b67a"><path d="M63 0l15.12 46.53H126L88.44 75.27l15.12 46.53L63 93.06 22.44 121.8l15.12-46.53L0 46.53h47.88z"/></svg>
+                Trustpilot
+              </span>
+            </p>
+          </div>
+
+          {/* Distribution bars */}
+          <div className="mt-8 max-w-xs mx-auto space-y-2">
+            {[5,4,3,2,1].map(s => <RatingBar key={s} stars={s} count={RATING_COUNTS[s]} />)}
           </div>
         </div>
+      </div>
 
-        {/* Liste des avis */}
-        <div className="space-y-4">
+      {/* Reviews grid */}
+      <div className="container-page max-w-4xl py-10">
+        <p className="text-[13px] text-neutral-500 mb-6 text-center">
+          Affichage des 100 avis les plus récents
+        </p>
+        <div className="grid md:grid-cols-2 gap-4">
           {REVIEWS.map((r, i) => (
-            <div key={i} className="bg-white rounded-xl border border-neutral-100 shadow-sm p-5">
-              <div className="flex items-start justify-between gap-3 mb-2">
-                <div>
-                  <Stars n={r.rating} size="text-[16px]" />
-                  <p className="font-bold text-[15px] text-neutral-900 mt-1">{r.title}</p>
-                </div>
-                <span className="text-[12px] text-neutral-400 shrink-0 mt-1">{r.date}</span>
+            <div key={i} className="bg-white rounded-lg border border-neutral-200 p-5 flex flex-col gap-3">
+              {/* Stars + date */}
+              <div className="flex items-center justify-between">
+                <StarRow filled={r.rating} size={18} />
+                <span className="text-[12px] text-neutral-400">{r.date}</span>
               </div>
-              <p className="text-[14px] text-neutral-700 leading-relaxed">{r.text}</p>
-              <div className="flex items-center gap-2 mt-3 pt-3 border-t border-neutral-100">
-                <div className="w-7 h-7 rounded-full bg-[#00b67a] flex items-center justify-center text-white text-[11px] font-bold shrink-0">
+              {/* Title + text */}
+              <div>
+                <p className="font-bold text-[14px] text-neutral-900 mb-1">{r.title}</p>
+                <p className="text-[13px] text-neutral-600 leading-relaxed">{r.text}</p>
+              </div>
+              {/* Author */}
+              <div className="flex items-center gap-2.5 mt-auto pt-3 border-t border-neutral-100">
+                <div className="w-8 h-8 rounded-full flex items-center justify-center text-white text-[12px] font-bold shrink-0"
+                  style={{ backgroundColor: "#00b67a" }}>
                   {r.name[0]}
                 </div>
-                <div>
-                  <span className="text-[13px] font-semibold text-neutral-900">{r.name}</span>
-                  <span className="text-[12px] text-neutral-400 ml-1.5">{r.city}</span>
+                <div className="flex-1 min-w-0">
+                  <p className="text-[13px] font-bold text-neutral-900 leading-tight">{r.name}</p>
+                  <p className="text-[11px] text-neutral-400">{r.city}, France</p>
                 </div>
-                <div className="ml-auto flex items-center gap-1">
-                  <svg viewBox="0 0 126 117" className="w-3.5 h-3.5" fill="#00b67a">
-                    <path d="M63 0L79.5 51H126L88.5 82.5L105 133.5L63 102L21 133.5L37.5 82.5L0 51H46.5L63 0Z" />
-                  </svg>
-                  <span className="text-[11px] text-[#00b67a] font-semibold">Vérifié</span>
+                <div className="flex items-center gap-1 shrink-0">
+                  <svg viewBox="0 0 24 24" fill="#00b67a" className="w-3.5 h-3.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  <span className="text-[11px] font-semibold" style={{ color: "#00b67a" }}>Vérifié</span>
                 </div>
               </div>
             </div>
           ))}
         </div>
-
       </div>
     </div>
   );
