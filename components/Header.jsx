@@ -40,7 +40,7 @@ export default function Header() {
           </button>
 
           {/* Center: logo */}
-          <Link href="/" className="absolute left-1/2 -translate-x-1/2">
+          <Link href="/products/leviya-tv" className="absolute left-1/2 -translate-x-1/2">
             <span className="font-black text-[22px] tracking-[-0.03em] uppercase leading-none select-none">ScreenLab</span>
           </Link>
 
