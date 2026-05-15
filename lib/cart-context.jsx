@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
+import { trackCheckout } from "@/lib/track";
 
 const CartContext = createContext(null);
 
@@ -29,10 +30,12 @@ export function CartProvider({ children }) {
     setItems((prev) => {
       const key = (i) => `${i.handle}::${i.variant || ""}`;
       const existing = prev.find((i) => key(i) === key(item));
-      if (existing) {
-        return prev.map((i) => key(i) === key(item) ? { ...i, qty: i.qty + (item.qty || 1) } : i);
-      }
-      return [...prev, { ...item, qty: item.qty || 1 }];
+      const next = existing
+        ? prev.map((i) => key(i) === key(item) ? { ...i, qty: i.qty + (item.qty || 1) } : i)
+        : [...prev, { ...item, qty: item.qty || 1 }];
+      const newTotal = next.reduce((s, i) => s + i.price * i.qty, 0);
+      trackCheckout({ items: next, cart_total: newTotal, step: "add_to_cart", completed: false });
+      return next;
     });
     setOpen(true);
   }

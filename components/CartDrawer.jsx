@@ -34,6 +34,13 @@ export default function CartDrawer() {
   const [emailSaved, setEmailSaved] = useState(false);
   const debounceRef             = useRef(null);
 
+  // Track cart_viewed à chaque ouverture du drawer
+  useEffect(() => {
+    if (open && items.length > 0) {
+      trackCheckout({ items, cart_total: total, step: "cart_viewed", email, completed: false });
+    }
+  }, [open]); // eslint-disable-line react-hooks/exhaustive-deps
+
   function handleEmailChange(e) {
     const val = e.target.value;
     setEmail(val);
