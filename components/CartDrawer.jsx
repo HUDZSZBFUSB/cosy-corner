@@ -28,7 +28,7 @@ function useReservation(durationSec = 300) {
 }
 
 export default function CartDrawer() {
-  const { items, open, setOpen, removeItem, updateQty, addItem, total } = useCart();
+  const { items, open, setOpen, removeItem, updateQty, addItem, clearCart, total } = useCart();
   const time = useReservation(300);
   const [email, setEmail]       = useState("");
   const [emailSaved, setEmailSaved] = useState(false);
@@ -242,6 +242,7 @@ export default function CartDrawer() {
                 email,
                 completed: false,
               });
+              clearCart();
               goToFantomCheckout(items);
             }}
             className="w-full bg-black text-white rounded-full py-4 font-bold tracking-wider uppercase text-[14px] hover:bg-neutral-800 transition disabled:opacity-40 disabled:cursor-not-allowed"

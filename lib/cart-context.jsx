@@ -52,12 +52,17 @@ export function CartProvider({ children }) {
     );
   }
 
+  function clearCart() {
+    setItems([]);
+    localStorage.removeItem("cosy-cart");
+  }
+
   const total = items.reduce((s, i) => s + i.price * i.qty, 0);
   const count = items.reduce((s, i) => s + i.qty, 0);
 
   return (
     <CartContext.Provider
-      value={{ items, open, setOpen, addItem, removeItem, updateQty, total, count }}
+      value={{ items, open, setOpen, addItem, removeItem, updateQty, clearCart, total, count }}
     >
       {children}
     </CartContext.Provider>
